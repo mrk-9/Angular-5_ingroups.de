@@ -1,0 +1,48 @@
+#login-page {
+    .page-wrapper {
+        min-height: calc(100vh - 70px);
+        .content-wrapper {
+            max-width: 500px;
+            padding-top: 150px;
+
+            .form-wrapper {
+                background-color: white;
+                border: 1px solid lightgray;
+                
+                .title {
+                    font-size: 25px;
+                    font-weight: bold;
+                }
+
+                input, select, textarea {
+                    &:focus {
+                        outline-style: none;
+                        box-shadow: none;
+                    }
+                }
+
+                .loading-spinner {
+                    mat-spinner {
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+
+        .background {
+            //background-image: url('../../assets/img/background/2.jpg');
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            top: 0;
+            z-index: -1;
+        }
+
+        .forgot-password {
+            a {
+                cursor: pointer;
+            }
+        }
+    }
+}

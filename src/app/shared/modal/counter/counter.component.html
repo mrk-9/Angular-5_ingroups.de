@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <h4 class="modal-title">Zählerdetails</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body text-center">
+    <div class="row mb-3">
+        <div class="col-12 col-sm-12 col-md-12">
+            Wie viele Teilnehmer suchst du?
+        </div>  
+    </div>
+    <div class="row mb-3">
+        <div class="form-inline m-auto">
+            <label class="col-form-label col-12 col-sm-4 col-md-4 px-0">Eingeben Zählerlimit:</label>
+            <div class="col-4 col-sm-3 col-md-3 px-0 ml-4 ml-md-0">
+                <div class="input-group">
+                    <div class="input-group-prepend">                    
+                        <span class="input-group-text bg-white pr-0">0 - </span>
+                    </div>
+                    <input type="text" class="pl-0 form-control border-left-0" (change)="setUpperlimit()" [(ngModel)]="counterLimit">
+                </div>
+            </div>
+            <label class="col-2 col-sm-1 col-md-1">Or</label>
+            <div class="col-5 col-sm-4 col-md-4 text-left pl-0">
+                <button type="button" (click)="setNolimit()" class="btn btn-default w-100">
+                    Unendlich
+                </button>
+            </div>   
+        </div>          
+    </div>
+    <div class="row d-inline-block">
+        <button type="button" (click)="counter()" class="btn btn-success">
+            Einreichen
+        </button> 
+    </div>
+</div>

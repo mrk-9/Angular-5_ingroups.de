@@ -1,0 +1,51 @@
+<page-header></page-header>
+<div id="login-page">
+    <div class="page-wrapper">
+        <div class="content-wrapper container">
+            <div class="form-wrapper rounded p-4">
+                <form [formGroup]="form">
+
+                    <div class="title">Einloggen</div>
+
+                    <div class="input-group mt-3" [ngClass]="validate.displayFieldCss(form, 'email')">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <span class="fa fa-envelope" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <input type="email" class="form-control" name="email" formControlName="email" placeholder="E-mail*">
+                    </div>
+
+                    <div class="input-group mt-3" [ngClass]="validate.displayFieldCss(form, 'password')">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <span class="fa fa-lock" aria-hidden="true"></span>
+                            </div>
+                        </div>
+
+                        <input type="password" class="form-control" name="password" formControlName="password" placeholder="Passwort*">
+                    </div>
+
+                    <div class="forgot-password text-right mt-1">
+                        <a (click)="forgotPassword()" class="text-primary">
+                            <u>Passwort vergessen?</u>
+                        </a>
+                    </div>
+
+                    <div class="mt-3 text-center loading-spinner" *ngIf="loading">
+                        <mat-spinner [diameter]="40"></mat-spinner>
+                    </div>
+
+                    <div class="mt-2 alert alert-warning" *ngIf="verificationError">You need to verify your email to login. please check your email or click
+                        <a class="text-primary" style="cursor: pointer;" (click)="resendVerifyEmail()">here</a> to resend verification code</div>
+
+                    <div class="btn-wrapper text-right mt-4" *ngIf="!loading">
+                        <button class="btn btn-success" (click)="login()">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="background"></div>
+    </div>
+</div>

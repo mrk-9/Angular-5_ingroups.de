@@ -1,0 +1,81 @@
+#myevents-page {
+    border-top: 2px solid;
+
+    #MainBox {
+        margin-top: 20px;
+
+        .contact-number {
+            font-size: 25px;
+        }
+    }
+
+    .new-event-btn {
+        width: 170px;
+        border: 2px solid white;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        color: white;
+        font-size: 20px;
+        text-align: center;
+        margin-top: 5px;
+        text-decoration: none;
+        background-color: darkgreen;
+        padding: 5px 10px;
+
+        &:focus {
+            outline: none
+        }
+    }
+
+    .UserPicture {
+        border-top-left-radius: 7px!important;
+        border-top-right-radius: 7px!important;
+        
+        .backdrop {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            opacity: 0.4;
+            z-index: 1;
+
+            &.dating {
+                background-color: #ee1d4e;
+            }
+
+            &.bildung {
+                background-color: #f0962c;
+            }
+
+            &.sport {
+                background-color: #3caddb;
+            }
+
+            &.reisen {
+                background-color: #fee332;
+            }
+
+            &.feiern {
+                background-color: #513499;
+            }
+
+            &.essen {
+                background-color: #a1c330;
+            }
+        }
+    }
+    .btn-primary{
+        background-color: #42c1df !important;
+        border-color: #42c1df !important;       
+    }
+    button[disabled] {
+        cursor: not-allowed;
+    }
+}
+@media screen and (max-width:1024px){
+    .font-12{
+        font-size: 12px;
+    }
+}

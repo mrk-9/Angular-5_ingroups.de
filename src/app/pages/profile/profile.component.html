@@ -1,0 +1,128 @@
+<div class="" id="profile-page">
+    <div class="page-content container">
+
+        <div class="edit-btn-wrapper text-right mb-4">
+            <button class="btn btn-success" *ngIf="mode == 'view'" (click)="editProfile()">Profil bearbeiten</button>
+            <button class="btn btn-success" *ngIf="mode == 'edit'" (click)="viewProfile()">Profil anschauen</button>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="photo-wrapper">
+                    <img [src]="info.photo? info.photo : '../../../assets/img/profile.jpg'" *ngIf="mode == 'view'">
+                    <img [src]="editInfo.photo? editInfo.photo : '../../../assets/img/profile.jpg'" *ngIf="mode == 'edit'">
+                    <input type="file" id="uploadImage" name="inputImage" accept="image/*;capture=camera" hidden (change)="uploadPhoto($event)">
+                    <button *ngIf="mode == 'edit'" class="mt-2">
+                        <label for="uploadImage" class="mb-0">Change photo</label>
+                    </button>
+                    <button *ngIf="mode == 'edit'" class="mt-2" (click)="removePhoto()">Remove photo</button>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <form>
+                    <div class="main-wrapper mb-4">
+                        <div class="name">
+                            <h2 class="text-capitalize" *ngIf="mode == 'view'">{{info.name}}</h2>
+
+                            <input class="form-control" name="name" *ngIf="mode == 'edit'" [(ngModel)]="editInfo.name">
+                        </div>
+
+                        <div class="about mt-5">
+                            <p class="title mb-4">
+                                <i class="fa fa-user"></i> Infos</p>
+
+                            <p class="text-muted text-uppercase mb-4">Kontaktinformationen</p>
+
+                            <div class="pl-4">
+
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-3 label">WhatsApp:</div>
+                                        <div class="col-sm-6 col-md-6 val" *ngIf="mode == 'view'">{{info.phone}}</div>
+
+                                        <div class="col-sm-6 col-md-6 val" *ngIf="mode == 'edit'">
+                                            <input class="form-control" name="phone" [(ngModel)]="editInfo.phone">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="item">
+                                    <div class="row">
+                                        <div class="col-3 label">Address:</div>
+                                        <div class="col-8 col-md-5" *ngIf="mode == 'view'">{{info.address}}</div>
+
+                                        <div class="col-8 col-md-8" *ngIf="mode == 'edit'">
+                                            <input class="form-control" name="address" [(ngModel)]="editInfo.address">
+                                        </div>
+                                    </div>
+                                </div> -->
+
+
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-sm-3 col-md-3 label pr-0">E-mail:</div>
+                                        <div class="col-sm-6 col-md-6 val" *ngIf="mode == 'view'">{{info.email}}</div>
+
+                                        <div class="col-sm-6 col-md-6 val" *ngIf="mode == 'edit'">
+                                            <input class="form-control" name="email" [(ngModel)]="editInfo.email" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="item">
+                                    <div class="row">
+                                        <div class="col-3 label">Site:</div>
+                                        <div class="col-6 val" *ngIf="mode == 'view'">{{info.site}}</div>
+
+                                        <div class="col-6 val" *ngIf="mode == 'edit'">
+                                            <input class="form-control" name="site" [(ngModel)]="editInfo.site">
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                            </div>
+
+                            <p class="text-muted text-uppercase mb-4">Sonstiges</p>
+
+                            <div class="pl-4">
+
+                                <div class="item">
+                                    <div class="row">
+
+                                        <div class="col-sm-3 label">Geburtstag:</div>
+                                        <div class="col-sm-6" *ngIf="mode == 'view'">{{info.birthday}}</div>
+
+                                        <div class="col-sm-6 col-md-6" *ngIf="mode == 'edit'">
+                                            <angular2-date-picker class="form-control" name="birthday" (ngModelChange)="convert($event)" [(ngModel)]="editInfo.birthday"
+                                                [settings]="settings" style="display: flow-root;padding: 1%;"></angular2-date-picker>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="row">
+                                        <div class="col-sm-3 label">Geschlecht:</div>
+                                        <div class="col-sm-6" *ngIf="mode == 'view'">{{info.gender}}</div>
+
+
+                                        <div class="col-sm-6 col-md-6" *ngIf="mode == 'edit'">
+                                            <select class="form-control" name="gender" [(ngModel)]="editInfo.gender">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="btn-wrapper">
+                            <button class="btn btn-success" *ngIf="mode == 'edit'" (click)="saveProfile()">Save Profile</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

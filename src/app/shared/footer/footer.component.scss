@@ -1,0 +1,56 @@
+#footer {
+    min-height: 350px;
+    padding-top: 25px;
+    background-color: #2B2D2E;
+    color: #767F86;
+    font-size: 14px;
+
+    .logo {
+        max-width: 180px;
+    }
+
+    .description {
+        line-height: 1.7;
+        text-align: justify;
+    }
+
+    .head {
+        color: #eef1f3;
+        font-size: 16px;
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    .FOOTERHOME_smallText {
+        font-size: 14px;
+        color: #8c969e;
+        font-weight: 300;
+        line-height: 1.0;
+    }
+
+    .app-store-badge-apple {
+        display: inline-block;
+        overflow: hidden;
+        background: url(https://linkmaker.itunes.apple.com/images/badges/de-de/badge_appstore-lrg.svg) no-repeat;
+        width: 165px;
+        height: 56px;
+        border: 8px solid transparent;
+        margin-bottom: 5px;
+    }
+
+    .app-store-badge-google {
+        display: inline-block;
+        overflow: hidden;
+        float: left;
+        height: 60px;
+    }
+
+    .socialIcons {
+        width: 40px;
+        margin-top: 10px;
+        margin-left: 5px;
+        float: left;
+    }
+}

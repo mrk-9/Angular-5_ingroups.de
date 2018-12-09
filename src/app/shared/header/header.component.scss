@@ -1,0 +1,109 @@
+#TopLeisteLoad {
+    .OberersteLeisteHome {
+        width: 100%;
+        height: 70px;
+
+        #IconTitelLeiste {
+            height: 40px;
+            float: left;
+            margin-left: 1%;
+            margin-top: 10px;
+        }
+
+        #TopMenu {
+            float: right;
+            margin-right: 30px;
+
+            .SocialIcons {
+                width: 30px;
+                margin-top: 17px;
+                margin-left: 20px;
+                float: left;
+            }
+
+            .signup {
+                a {
+                    height: 70px;
+                    display: inline-block;
+                    line-height: 70px;
+                    cursor: pointer;
+                    padding: 0px 10px;
+                    text-transform: uppercase;
+                    font-weight: bold;
+
+                    &:hover {
+                        text-decoration: none;
+                        background-color: #eee;
+                    }
+                }
+            }
+
+            .main-nav {
+                a:not(.dropdown-item) {
+                    height: 70px;
+                    display: inline-block;
+                    line-height: 70px;
+                    cursor: pointer;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    font-size: 13px;
+                    padding: 0px 10px;
+                    color: #5dc8dd;
+
+                    &:hover {
+                        text-decoration: none;
+                        background-color: #eee;
+                    }
+
+                    &.dropdown-toggle {
+                        &:after {
+                            content: none;
+                        }
+                    }
+
+                    i {
+                        font-size: 25px;
+                        vertical-align: middle;
+                    }
+                }
+
+                .avatar {
+                    width: 55px;
+                    height: 50px;
+                    border-radius: 100%;
+                    background-size: cover;
+                }
+            }
+
+            .dropdown-item {
+                cursor: pointer;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            #IconTitelLeiste {
+                content: url('../../../assets/img/Icon_rgb.png'); 
+                margin-left: 10px;
+            }
+
+            #TopMenu {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .message {
+        position: relative;
+
+        .new-message {
+            position: absolute;
+            top: 15px;
+            right: 0px;
+            content: '';
+            width: 13px;
+            height: 13px;
+            background-color: red;
+            border-radius: 100%;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+#eventContact {
+    .has-error {
+        input, select, textarea {
+            border: 1px solid red;
+        }
+    }
+
+    textarea {
+        height: 120px;
+    }
+
+    .locationContactList {
+        .item {
+            padding: 5px;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 100px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+
+            img {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                min-height: 100%;
+                width: 100%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        @media only screen and (max-width: 760px) {
+            .image-wrapper {
+                height: 60px;
+            }
+        }
+    }
+
+    .selectLocation select { 
+        width: 100%;
+        background-color: #fff;
+        color: #66696e;
+        border-radius: 10px;
+        height: 40px !important;
+        padding-left: 15px;
+    }
+
+    .moreEvents {
+        color: #fff;
+        background-color: #42c1df;
+        border-color: #42c1df;
+    }
+
+    button[disabled] {
+        cursor: not-allowed;
+    }
+
+    .eventInfoBox {
+        border: 1px #aaa solid;
+        border-radius: 7px;
+        box-shadow: 10px 10px 22px -8px rgba(189,187,189,1);
+    }
+
+    .text-wrap {
+        word-wrap: break-word; 
+    }    
+
+    @media only screen and (max-width: 320px) {
+        .btn-padding{
+            padding-left: 0px;
+        }
+    }
+}
+
+

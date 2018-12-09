@@ -1,0 +1,74 @@
+<div id="message-page">
+
+    <div class="page-wrapper">
+        <div class="side-content" fxLayout="row" fxFlexFill>
+            <div fxFlex.xs="100%" fxFlex.gt-xs="350px" *ngIf="msgService.mode == 'desktop' || (msgService.mode == 'mobile' && msgService.selectedContactId == -1)">
+                <div class="message-list">
+                    <div class="category" *ngFor="let category of msgService.contactList">
+                        <div class="title">{{category.eventName}}</div>
+                        <div class="item-list">
+                            <div class="item" *ngFor="let item of category.items" [ngClass]="{selected: item.id == msgService.selectedContactId && msgService.mode == 'desktop'}">
+                                <div fxLayout="row" fxLayoutAlign="start center">
+                                    <div fxFlex="25">
+                                        <img class="avatar" [src]="item.partnerPhoto? item.partnerPhoto : 'assets/img/profile.jpg'" (click)="showGallery(item)">
+                                    </div>
+                                    <div fxFlex="80">
+                                        <label class="name d-block mb-0 font-weight-bold" (click)="selectPartner(item)">{{item.partnerName}}</label>
+                                    </div>
+
+                                    <span class="badge badge-danger" *ngIf="item.unread > 0">{{item.unread}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div fxFlex *ngIf="msgService.mode == 'desktop' || (msgService.mode == 'mobile' && msgService.selectedContactId != -1)">
+                <div class="message-content" *ngIf="!msgService.noContact && msgService.loaded">
+                    <div class="top" fxLayout="row" fxLayoutAlign="start center">
+                        <i class="fa fa-arrow-left d-block d-sm-none ml-2" (click)="back()" style="font-size: 25px"></i>
+
+                        <img class="avatar ml-3" [src]="msgService.selectedItem.partnerPhoto? msgService.selectedItem.partnerPhoto : 'assets/img/profile.jpg'"
+                            (click)="showGallery(msgService.selectedItem)">
+                        <label class="name mb-0 ml-2">{{msgService.selectedItem.partnerName}}</label>
+
+                    </div>
+
+                    <div class="content" id="message-content">
+                        <div *ngIf="!loadingMessage">
+                            <div class="message" *ngFor="let message of messages; let i = index" [ngClass]="{send: setting.getUserSetting('id') == message.from, received: setting.getUserSetting('id') != message.from}">
+                                <div class="message-inner">
+                                    <p class="">{{message.message}}</p>
+                                    <label class="time">{{message.created_at | date:'HH:mm'}}</label>
+                                </div>
+                            </div>
+
+                            <div class="no-message text-center" *ngIf="messages.length == 0 && loaded">no messages</div>
+                        </div>
+
+                        <div *ngIf="loadingMessage" class="text-center">loading....</div>
+                    </div>
+
+                    <div class="bottom">
+                        <div fxLayout="row" fxFlexFill class="p-1">
+                            <div fxFlex>
+                                <input type="text" name="message" [(ngModel)]="message" (keyup)="sendMessageByEnter($event)">
+                            </div>
+                            <div fxFlex="100px" fxFlex.xs="60px" fxFlexOffset="10px">
+                                <button (click)="sendMessage()">
+                                    <i class="fa fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="message-content" *ngIf="noContact">
+                    <div>You don't have any contact yet</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

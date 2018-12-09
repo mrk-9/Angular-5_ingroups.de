@@ -1,0 +1,353 @@
+<div class="modal-header">
+    <h4 class="modal-title">Neues Event</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div>
+        <!-- Nav tabs -->
+
+        <!-- <ul class="nav nav-tabs" role="tablist" id="eventCreateTabs">
+            <li role="presentation" class="nav-item">
+                <a href="#create" aria-controls="create" role="tab" data-toggle="tab" class="nav-link active">1. Event anlegen
+                </a>
+            </li>
+            <li role="presentation" class="nav-item">
+                <a href="#success" aria-controls="success" role="tab" data-toggle="tab" class="nav-link disabled">2. Fast Fertig!</a>
+            </li>
+        </ul> -->
+        <div class="tab-content" style="margin-top: 10px;">
+            <div role="tabpanel" class="tab-pane active" id="create">
+                <form class="form-horizontal" [formGroup]="form" id="eventCreate">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="card-title mb-0">Event Bild:</h6>
+                        </div>
+                        <div class="card-content">
+                            <div class="UserPicturePreview">
+                                <label id="uploadImageLabel" for="uploadImage">
+                                    <img [src]="info.image == '' ? '../../../assets/img/profile.jpg' : info.image" class="img-responsive img-rounded" id="uploadImagePreview"
+                                    />
+                                </label>
+                            </div>
+                            <br/>
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <label for="uploadImage">Bild ändern</label>
+                                    </div>
+                                </div>
+                                <input type="file" id="uploadImage" name="inputImage" accept="image/*;capture=camera" hidden (change)="fileChangeListener($event)">
+                                <input type="text" id="newEventUploadImageName" class="form-control" placeholder="" readonly style="background-color: white;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <h6 class="card-title mb-0">Event Informationen:</h6>
+                        </div>
+                        <div class="card-content">
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">
+                                        Was habt ihr vor?
+                                    </label>
+                                    <div class="col-md-9">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'title')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fa fa-question-circle" aria-hidden="true"></span>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" name="title" [(ngModel)]="info.title" formControlName="title" placeholder="Schwimmen gehen..."
+                                                maxlength="100" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">
+                                        Wann?
+                                    </label>
+                                    <div class="col-md-9">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'date')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fa fa-calendar" aria-hidden="true"></span>
+                                                </div>
+                                            </div>
+                                            <input type="date" class="form-control" name="date" [(ngModel)]="info.date" formControlName="date" placeholder="dd.mm.yyyy"
+                                                maxlength="35" required>
+
+
+                                            <!-- <p-calendar formControlName="date" [(ngModel)]="info.date"></p-calendar>    -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">
+                                        Zeit?
+                                    </label>
+                                    <div class="col-md-9">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'time')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fa fa-calendar" aria-hidden="true"></span>
+                                                </div>
+                                            </div>
+
+                                            <p-calendar [timeOnly]="true" formControlName="time" placeholder="  hh:mm"></p-calendar>
+                                            <!-- <input type="date" class="form-control" name="date" [(ngModel)]="info.time" formControlName="time" placeholder="dd.mm.yyyy"
+                                                maxlength="35" required> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" *ngIf="businessUser">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">
+                                        Alternative E-Mail Adresse
+                                    </label>
+                                    <div class="col-md-9">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'contact_email')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fa fa-envelope" aria-hidden="true"></span>
+                                                </div>
+                                            </div>
+                                            <input type="email" class="form-control" formControlName="contact_email" name="contact_email" [(ngModel)]="info.contact_email"
+                                                placeholder="max.huber@beispiel.com">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--<div class="form-group">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">
+                                        WhatsApp
+                                    </label>
+                                    <div class="col-md-9">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'phonenumber')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fa fa-whatsapp" aria-hidden="true"></span>
+                                                </div>
+                                            </div>
+                                            <input type="tel" class="form-control" name="phonenumber" [(ngModel)]="info.phonenumber" formControlName="phonenumber" placeholder="0176 29428669">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="card mt-2">
+                        <div class="card-header">
+                            <h6 class="card-title">Event Details:</h6>
+                        </div>
+                        <div class="card-content">
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">
+                                        Ort ausw&auml;hlen
+                                    </label>
+                                    <div class="col-md-9 addLocation">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'location')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fa fa-globe" aria-hidden="true"></span>
+                                                </div>
+                                            </div>
+                                            <ng-multiselect-dropdown class="form-control dropdown-width" name="location" [data]="locations" [(ngModel)]="selectedLocations"
+                                                [settings]="dropdownSettings" formControlName="location">
+                                            </ng-multiselect-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" *ngIf="businessUser">
+                                <div class="row">
+                                    <label class="col-md-3 control-label pr-0">
+                                        Local ausw&auml;hlen
+                                    </label>
+                                    <div class="col-md-9 addLocality">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'locality')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fa fa-globe" aria-hidden="true"></span>
+                                                </div>
+                                            </div>
+                                            <ng-multiselect-dropdown class="form-control dropdown-width" name="locality" [data]="localities" [(ngModel)]="selectedLocalities"
+                                                (ngModelChange)="addLocationIdtoList()" [settings]="localityDropdownSettings"
+                                                formControlName="locality">
+                                            </ng-multiselect-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">
+                                        Aktion auswählen
+                                        <span class="glyphicon glyphicon-tower" aria-hidden="true"></span>
+                                    </label>
+                                    <div class="col-md-9">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'category')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fa fa-archive" aria-hidden="true"></span>
+                                                </div>
+                                            </div>
+                                            <select class="form-control category" name="action" [(ngModel)]="info.category" formControlName="category" [ngClass]="{dating: info.category == 'Dating', bildung: info.category == 'Bildung', sport: info.category == 'Sport & Fitness', reisen: info.category == 'Reisen', feiern: info.category == 'Feiern', essen: info.category == 'Essen & Trinken'}">
+                                                <option value="Dating" style="color: #ee1d4e">Dating</option>
+                                                <option value="Bildung" style="color: #f0962c">Bildung</option>
+                                                <option value="Sport & Fitness" style="color: #3caddb">Sport & Fitness</option>
+                                                <option value="Reisen" style="color: #fee332">Reisen</option>
+                                                <option value="Feiern" style="color: #513499">Feiern</option>
+                                                <option value="Essen & Trinken" style="color: #a1c330">Essen & Trinken</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" *ngIf="!businessUser">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">
+                                        Wie viele Personen seid ihr?
+                                    </label>
+                                    <div class="col-md-9">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'number')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fa fa-user" aria-hidden="true"></span>
+                                                </div>
+                                            </div>
+                                            <select class="form-control" name="number" [(ngModel)]="info.number" formControlName="number">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group" *ngIf="businessUser">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">
+                                        Teilnehmer
+                                    </label>
+                                    <div class="col-md-9">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'number')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <span class="fa fa-user" aria-hidden="true"></span>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" name="number" [(ngModel)]="info.number" formControlName="number" (click)="setCounter(info.number)"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group" *ngIf="businessUser">
+                                <div class="row">
+                                    <label class="col-md-3 control-label">
+                                        Position
+                                    </label>
+                                    <div class="col-md-9">
+                                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'position')">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="fa fa-th-large" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                            <input type="text" class="form-control" name="position" [(ngModel)]="info.position" formControlName="position" (click)="setPosition()"
+                                                readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label text-left" style="text-align: left;">
+                                    Beschreibung
+                                </label>
+                                <div [ngClass]="validate.displayFieldCss(form, 'description')">
+                                    <textarea class="UPLOAD-BubbleEingabeText form-control" name="description" [(ngModel)]="info.description" formControlName="description"
+                                        rows="6" placeholder="Wir gehen zusammen zur Isar zum Schwimmen..." required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-2 text-right">
+                                <input type="checkbox" id="agb" name="confirm" formControlName="confirm" [(ngModel)]="confirm">
+                            </div>
+                            <div class="col-10">
+                                Ich habe die
+                                <a href="/agb" target="_blank">AGBs</a> und die
+                                <a href="/datenschutz" target="_blank">Datenschutzerklärung</a>
+                                gelesen und akzeptiere diese.
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="form-group mt-2">
+                        <div class="row">
+                            <div class="col-6 text-left">
+                                <button class="btn btn-danger" (click)="activeModal.dismiss()">
+                                    <span class="fa fa-trash"></span> Abbrechen
+                                </button>
+                            </div>
+                            <div class="col-6 text-right">
+                                <button type="submit" class="btn btn-success" (click)="createEvent()">
+                                    <span class="fa fa-envelope"></span> Weiter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="success">
+                <div class="alert alert-success">
+                    Danke, sie erhalten in ca. 3 Minuten eine Whatsapp-Nachricht zur Aktivierung des Events. Alternativ können sie das Event
+                    auch mit der E-mail aktivieren, welche wir ihnen gesendet haben.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="loading" id="loading" style="" align="center" *ngIf="loading">
+        <p>
+            <img src="../../../../assets/img/ajax-loader.gif" height="96" width="96" style="z-index: 2; position:relative;" /> Bitte warten
+        </p>
+    </div>
+</div>

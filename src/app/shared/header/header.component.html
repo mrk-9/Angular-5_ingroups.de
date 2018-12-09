@@ -1,0 +1,41 @@
+<div id="TopLeisteLoad">
+    <!-- Obere leiste mit Bild und zwei Buttons -->
+    <div class="OberersteLeisteHome" id="NotLogged">
+        <a [routerLink]="['/']">
+            <img src="../../../assets/img/Logo_Event-Community_rgb.png" id="IconTitelLeiste">
+        </a>
+
+
+        <div id="TopMenu">
+            <div class="signup" *ngIf="!setting.getAppSetting('is_loggedin')">
+                <a [routerLink]="['/login']">Login</a>
+                <a [routerLink]="['/register']">Registrieren</a>
+            </div>
+
+            <div class="main-nav" *ngIf="setting.getAppSetting('is_loggedin')">
+                <a [routerLink]="['/myevents']">
+                    <span class="d-none d-sm-inline-block">Mein Event</span>
+                    <i class="fa fa-envelope d-sm-none"></i>
+                </a>
+                <a [routerLink]="['/messages']" class="message">
+                    <span class="d-none d-sm-inline-block">Nachrichten</span>
+                    <i class="fa fa-comment d-sm-none"></i>
+                    <i class="new-message" *ngIf="msgService.isNewMessage"></i>
+                </a>
+
+                <a class="dropdown-toggle px-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img [src]="setting.getUserSetting('photo')? setting.getUserSetting('photo') : '../../../assets/img/profile.jpg'" class="avatar">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" [routerLink]="['/profile']">Nutzer: {{setting.getUserSetting('name')}}</a>
+                    <a class="dropdown-item" [routerLink]="['/profile']">Mein Profil</a>
+                    <a class="dropdown-item" [routerLink]="['/settings']">Einstellungen</a>
+
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="logout()">Abmelden</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

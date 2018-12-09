@@ -1,0 +1,177 @@
+<div class="modal-header">
+    <h4 class="modal-title">Event Kontakt</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body" id="eventContact">
+    <div class="eventInfo">
+        <div class="eventInfoBox">
+            <div class="row">
+                <div class="col-12">
+                    <div class="UserPicturePreview">
+                        <img [src]="event.image ? event.image : '../../../assets/img/profile.jpg'" />
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 font-weight-bold text-left truncate">
+                    {{event.Titel}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 text-left font-xs-12 truncate text-wrap" title={{event.Ort}}>
+                    {{(event.Ort.length>30)? (event.Ort|slice:0:30)+'...':(event.Ort)}} | {{event.Datum | date:'EEEE, dd. MMM'}} {{event.time? '| ' + event.time.substr(0, 5) + ' Uhr' : ''}}
+                </div>
+            </div>
+            <div class="border"></div>
+            <div class="row">
+                <div class="col-12 font-weight-bold text-left truncate">
+                    Beschreibung
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-12 text-left">
+                    <p>{{event.Beschreibung}}</p>
+                </div>
+            </div>
+            
+            <div class="row" *ngIf="event.specialEvent && !fromSpecialEvent">
+                <div class="col-12 col-sm-4 col-md-4 text-left">
+                    <button class="btn moreEvents w-100" (click)="getSpecialEvent(event.createrId)">Mehr Events</button>
+                </div>
+                <div class="col-12 col-sm-3 col-md-3 text-center font-weight-bold contact-number">
+                    <div *ngIf="upperlimit != -1">
+                        <span>Teilnehmer</span>
+                        <span class="text-danger">{{contact_count}}/{{upperlimit}}</span>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-5 col-md-5 text-right">
+                    <button *ngIf="upperlimit != -1" class="btn btn-success w-100" (click)="showContactList = !showContactList">{{showContactList ? 'Teilnehmer ausblenden' : 'Teilnehmer'}}</button>
+                    <!-- <button class="btn btn-success" *ngIf="showContactList" (click)="showContactList = false">Hide contacts </button> -->
+                </div>
+            </div>
+
+            <div class="row" *ngIf="!event.specialEvent || event.specialEvent && fromSpecialEvent">
+                <div class="col-12 col-sm-7 col-md-7 text-left font-weight-bold contact-number">
+                    <div *ngIf="upperlimit != -1">
+                        <span>Teilnehmer</span>
+                        <span class="text-danger">{{contact_count}}/{{upperlimit}}</span>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-5 col-md-5 text-right">
+                    <button *ngIf="upperlimit != -1" class="btn btn-success w-100" (click)="showContactList = !showContactList">{{showContactList ? 'Teilnehmer ausblenden' : 'Teilnehmer'}}</button>
+                    <!-- <button class="btn btn-success" *ngIf="showContactList" (click)="showContactList = false">Hide contacts </button> -->
+                </div>
+            </div>
+
+            <div class="locationContactList" *ngIf="upperlimit != -1 && showContactList">
+                <div *ngFor="let item of locationContactList" class="item" style="cursor: pointer">
+                    <div class="row" (click)="toggleContactForm(item)">
+                        <div class="col-4">
+                            <div class="image-wrapper">
+                                <img [src]="item.Bild" style="width: 100%">
+                            </div>
+                        </div>
+                        <div class="col-8">
+                            <h5>{{item.name}}
+                                <span *ngIf="item.contacterId == setting.getUserSetting('id')">(you)</span>
+                            </h5>
+                            <p class="text-muted">{{item.age}} Jahre alt</p>
+                        </div>
+
+                    </div>
+
+                    <!-- <div class="contact-form" *ngIf="item.showContactForm">
+                        <contact2user-form (onSubmit)="submitContact2User($event, item)"></contact2user-form>
+                    </div> -->
+                </div>
+
+                <div *ngIf="upperlimit != -1 && locationContactList.length == 0">
+                    <span>Noch keine Teilnehmer</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <img src="../../../../assets/img/transfer.png" class="transferImage" style="margin-bottom: 10px;-webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -o-transform: rotate(90deg);-ms-transform: rotate(90deg); "
+            />
+        </div>
+
+        <form class="form-horizontal" [formGroup]="form" id="eventCreate">
+
+            <div *ngIf="event.specialEvent && locations.length > 1" class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Ort auswählen:</h6>
+                </div>
+                <div class="selectLocation">
+                    <select class="border-0" [(ngModel)]="info.selectedLocation" (ngModelChange)="locationChanged(info.selectedLocation)" [ngModelOptions]="{standalone: true}" placeholder="Select location">
+                        <option *ngFor="let location of locations" [ngValue]="location">{{location}}</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Dein Bild:</h6>
+                </div>
+                <div class="card-content">
+                    <div class="UserPicturePreview">
+                        <label id="uploadImageLabel" for="uploadImage" style="width: 100%">
+                            <img [src]="info.image == '' ? '../../../assets/img/profile.jpg' : info.image" class="img-responsive img-rounded" id="uploadImagePreview"
+                            />
+                        </label>
+                    </div>
+                    <br/>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <label for="uploadImage">Bild ändern</label>
+                            </div>
+                        </div>
+                        <input type="file" id="uploadImage" name="inputImage" accept="image/*;capture=camera" hidden (change)="fileChangeListener($event)">
+                        <input type="text" class="form-control" id="eventContactUploadImageName" placeholder="" readonly style="background-color: white;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-2">
+                <div class="card-header">
+                    <h6 class="card-title mb-0">Deine Nachricht:</h6>
+                </div>
+                <div class="card-content">
+                    <div class="form-group mb-0">
+                        <div class="input-group" [ngClass]="validate.displayFieldCss(form, 'message')">
+
+                            <textarea class="form-control" name="message" [(ngModel)]="info.message" formControlName="message" placeholder="Klingt interessant und ich würd gern mitkommen!">
+                        </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-2">
+                <div class="row">
+                    <div class="col-6 text-left">
+                        <button class="btn btn-danger" (click)="activeModal.dismiss()">
+                            <span class="fa fa-trash"></span> Abbrechen
+                        </button>
+                    </div>
+                    <div class="col-6 text-right btn-padding">
+                        <button type="submit" class="btn btn-success" (click)="createContact()" [disabled]="event.createrId == setting.getUserSetting('id')">
+                            <span class="fa fa-envelope"></span> {{(contact_count
+                            < upperlimit || upperlimit==- 1) ? 'Abschicken' : 'Join Waitinglist'}} </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="loading" id="loading" style="" align="center" *ngIf="loading">
+            <p>
+                <img src="../../../../assets/img/ajax-loader.gif" height="96" width="96" style="z-index: 2; position:relative;" /> Bitte warten
+            </p>
+        </div>
+
+    </div>

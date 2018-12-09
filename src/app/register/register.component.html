@@ -1,0 +1,89 @@
+<page-header></page-header>
+<div id="register-page">
+    <div class="page-wrapper">
+        <div class="content-wrapper container">
+            <div class="form-wrapper rounded p-4">
+                <form [formGroup]="form">
+
+                    <div class="title">Registriere dich für InGroups</div>
+
+
+                    <div class="input-group mt-4" [ngClass]="validate.displayFieldCss(form, 'name')">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <span class="fa fa-user" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <input type="text" class="form-control" name="name" formControlName="name" placeholder="Name*">
+                    </div>
+
+                    <div class="input-group mt-3" [ngClass]="validate.displayFieldCss(form, 'email')">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <span class="fa fa-envelope" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <input type="email" class="form-control" name="email" formControlName="email" placeholder="E-mail*">
+                    </div>
+
+                    <div class="input-group mt-3" [ngClass]="validate.displayFieldCss(form, 'birthday')">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <span class="fa fa-birthday-cake" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <angular2-date-picker class="form-control" formControlName="birthday" (ngModelChange)="convert($event)" name="birthday" [(ngModel)]="birthday"
+                            [settings]="settings" style="padding: 0%;"></angular2-date-picker>
+                    </div>
+
+                    <div class="input-group mt-3" [ngClass]="validate.displayFieldCss(form, 'password')">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <span class="fa fa-lock" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <input type="password" class="form-control" name="password" formControlName="password" placeholder="Passwort*">
+                    </div>
+
+                    <div class="input-group mt-3 mb-3" [ngClass]="validate.displayFieldCss(form, 'repeat_password')">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <span class="fa fa-check" aria-hidden="true"></span>
+                            </div>
+                        </div>
+                        <input type="password" class="form-control" name="repeat_password" formControlName="repeat_password" placeholder="Passwort wiederholen*">
+                    </div>
+
+                    <div class="pl-2" class="terms">
+                        <mat-checkbox class="mt-3" formControlName="terms" style="vertical-align: middle"></mat-checkbox>
+                        <span class="link">Ich stimme den
+                            <a href="/agb" target="_blank">AGBs</a>
+                            zu
+                        </span>
+                    </div>
+
+                    <div class="pl-2" class="terms">
+                        <mat-checkbox class="mt-3" formControlName="privacy" style="vertical-align: middle"></mat-checkbox>
+                        <span class="link">Ich stimme den
+                            <a href="/datenschutz" target="_blank">Datenschutzbestimmungen</a>
+                            zu
+                        </span>
+                    </div>
+
+                    <div class="mt-4 text-center loading-spinner" *ngIf="loading">
+                        <mat-spinner [diameter]="40"></mat-spinner>
+                    </div>
+
+                    <div class="mt-2 alert alert-success" *ngIf="sentVerifiedEmail">Thanks for your register. We send confirm link to your email. you need to verify your email to login</div>
+
+                    <div class="btn-wrapper text-right mt-4" *ngIf="!loading">
+                        <button class="btn btn-success" (click)="register()">Register</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="background"></div>
+    </div>
+</div>

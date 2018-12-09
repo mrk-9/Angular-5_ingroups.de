@@ -1,0 +1,15 @@
+.image-wrapper {
+  position: relative;
+  img {
+    width: 100%;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+  }
+}

@@ -1,0 +1,124 @@
+#eventCreateTabs {
+    a.disabled {
+        cursor: not-allowed;
+    }
+}
+
+.tab-content {
+    .card {
+        border-color: #00C0DF;
+        .card-header {
+            background-color: #00C0DF;
+            color: white;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+    }
+
+    .UserPicturePreview {
+        #uploadImageLabel {
+            display: block;
+
+            img {
+                position: relative;
+                left: 50%;
+                top: 50%;
+                min-height: 0%;
+                width: 100%;
+                -webkit-transform: translate(-50%, -0%);
+                -ms-transform: translate(-50%, -0%);
+                transform: translate(-50%, -0%);
+                border-radius: 6px;
+            }
+        }
+    }
+
+    .has-error {
+        input, select, textarea {
+            border: 1px solid red;
+        }
+    }
+
+    .category {
+        &.dating {
+            background-color: #ee1d4e;
+            color: white;
+        }
+
+        &.bildung {
+            background-color: #f0962c;
+            color: white;
+        }
+
+        &.sport {
+            background-color: #3caddb;
+            color: white;
+        }
+
+        &.reisen {
+            background-color: #fee332;
+            color: white;
+        }
+
+        &.feiern {
+            background-color: #513499;
+            color: white;
+        }
+
+        &.essen {
+            background-color: #a1c330;
+            color: white;
+        }
+    }
+}
+
+input.form-control.ng-pristine,
+input.form-control.ng-dirty.ng-valid.ng-touched {
+    padding: 5px 12px;
+    background-color: #fff;
+}
+
+ng-multiselect-dropdown{
+    width: 88.8%; 
+}
+
+@media screen and (max-width:425px){
+    ng-multiselect-dropdown{
+        width: 86.9%;
+    }
+}
+
+@media screen and (max-width:414px){
+    ng-multiselect-dropdown{
+        width: 86.7%;
+    }
+}
+
+@media screen and (max-width:411px){
+    ng-multiselect-dropdown{
+        width: 86.6%;
+    }
+}
+
+@media screen and (max-width:375px){
+    ng-multiselect-dropdown{
+        width: 84.9%; 
+    }
+}
+
+@media screen and (max-width:360px){
+    ng-multiselect-dropdown{
+        width: 84.1%; 
+    }
+}
+
+@media screen and (max-width:320px){
+    p-calendar{
+        width: 80% !important;
+    }
+    ng-multiselect-dropdown{
+        width: 81%; 
+    }
+}

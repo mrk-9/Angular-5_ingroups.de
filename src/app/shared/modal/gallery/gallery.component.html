@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4 class="modal-title">Nutzerdetails</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="row p-3">
+        <img [src]="imageUrl? imageUrl : 'assets/img/profile.jpg'">
+    </div>
+    <div class="row p-3">
+        <div class="col-12">
+            <div class="row text-capitalize">
+                <h5>Name : {{name}}</h5>
+            </div>
+            <div class="row">
+                <h5>Alter : {{age}}</h5>
+            </div>
+        </div>
+    </div>
+</div>

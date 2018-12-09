@@ -1,0 +1,11 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-progress-bar mode="indeterminate" *ngIf="setting.loading"></mat-progress-bar>
+<div class="cookiebar" *ngIf="!setting.getStorage('checkCookieBar')">
+    <h5>We use cookies</h5>
+    <p class="mb-0">
+        <a href="/datenschutz" target="_blank">Wir benutzen Cookies um unseren Nutzern ein besseres Erlebnis auf der Seite bieten zu können. Mit der Verwendung der Seite stimmen sie der Nutzung von Cookies zu.</a>
+    </p>
+    <button (click)="checkCookieBar()" class="mt-2">Ok</button>
+</div>
+<p-growl></p-growl>
+<router-outlet></router-outlet>

@@ -1,0 +1,462 @@
+<div class="page-layout">
+    <div id="TopBoxGesamt">
+        <div id="MEGA_BACKGORUND_box" data-toggle="modal" data-target="#videoModal">
+            <!--<div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_1" style="background-image: url('/img/background/2.jpg'); "></div>-->
+            <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_2" style="background-image: url('../../../assets/img/background/17.jpg');"></div>
+            <!-- <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_3" style="background-image: url('../../../assets/img/background/5.jpg'); display: none"></div>
+            <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_4" style="background-image: url('../../../assets/img/background/18.jpg'); display: none"></div> -->
+            <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_5" style="background-image: url('../../../assets/img/background/14.jpg'); display: none"></div>
+            <!--<div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_6" style="background-image: url('/img/background/8.jpg'); display: none"></div>-->
+            <!--<div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_7" style="background-image: url('/img/background/9.jpg'); display: none"></div>-->
+            <!-- <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_8" style="background-image: url('../../../assets/img/background/20.jpg'); display: none"></div>
+            <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_9" style="background-image: url('../../../assets/img/background/16.jpg'); display: none"></div> -->
+            <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_10" style="background-image: url('../../../assets/img/background/13.jpg'); display: none"></div>
+            <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_10" style="background-image: url('../../../assets/img/background/21.jpg'); display: none"></div>
+            <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_10" style="background-image: url('../../../assets/img/background/22.jpg'); display: none"></div>
+            <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_10" style="background-image: url('../../../assets/img/background/23.jpg'); display: none"></div>
+            <div class="MegaBackgroundBanner" id="MEGA_BACKGORUND_10" style="background-image: url('../../../assets/img/background/24.jpg'); display: none"></div>
+        </div>
+
+
+        <div id="TextBoxUeberBanner">
+
+            <img src="../../../assets/img/Logo_InGroups_w_rgb.png" id="IconTitelLeisteHaupt">
+
+            <!-- Button unter dem text -->
+            <div style="vertical-align: middle; max-width: 200px; float: right">
+                <button id="InfoButtonNew" class="btn btn-xs" data-toggle="modal" data-target="#helpModal">
+                    So funktionierts
+                </button>
+                <a id="JoinUsButton" class="JoinUsButtonDesign" (click)="newEvent()">
+                    Neues Event
+                </a>
+            </div>
+        </div>
+
+        <!-- <a data-toggle="modal" data-target="#videoModal" style="cursor: pointer; font-size: 30px; margin-left: 10px; margin-top: -70px; opacity: 0.8; text-shadow: 2px 2px 10px black; color:#FFFFFF; position: absolute"
+            class="fa fa-play-circle"></a>
+        <a data-toggle="modal" data-target="#helpModal" style="cursor: pointer; font-size: 30px; margin-left: 10px; margin-top: -70px; opacity: 0.8; text-shadow: 2px 2px 10px black; color:#FFFFFF; position: absolute;right: 20px;"
+            class="fa fa-info-circle"></a> -->
+
+        <!-- Suchleiste in der Mitte der Page -->
+        <div id="TopBarBoxDiv">
+            <div class="TopBarBoxInner">
+                <div class="navbar accordion" id="accordion">
+                    <ul class="nav" fxFlex fxLayoutAlign="space-around center">
+                        <li class="nav-item">
+                            <a id="Home" (click)="clearFilter()" style="cursor: pointer">
+                                &nbsp;
+                                <span class="fa fa-home"></span>&nbsp;
+                            </a>
+                        </li>
+                        <li id="WasMenu" class="nav-item">
+                            <a href="#FilterWasGesamt" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="FilterWasGesamt" (click)="hideToggle('#FilterWasGesamt')">
+                                <span class="fa fa-picture-o"></span>
+                                <span class="d-none d-sm-inline">KATEGORIE</span>
+                            </a>
+                        </li>
+                        <li id="WoMenu" class="nav-item">
+                            <a href="#FilterWoGesamt" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="FilterWoGesamt" (click)="hideToggle('#FilterWoGesamt')">
+                                <span class="fa fa-map-marker"></span>
+                                <span class="d-none d-sm-inline">STADT</span>
+                            </a>
+                        </li>
+                        <li id="WannMenu" class="nav-item">
+                            <a href="#FilterWannGesamt" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="FilterWannGesamt" (click)="hideToggle('#FilterWannGesamt')">
+                                <span class="fa fa-clock-o"></span>
+                                <span class="d-none d-sm-inline">DATUM</span>
+                            </a>
+                        </li>
+                        <li id="WerMenu" class="nav-item">
+                            <a href="#FilterWerGesamt" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="FilterWerGesamt" (click)="hideToggle('#FilterWerGesamt')">
+                                <span class="fa fa-user"></span>
+                                <span class="d-none d-sm-inline">GRUPPE/EINZEL</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div>
+                    <div class="filterBox collapse" id="FilterWasGesamt" data-parent="#accordion">
+                        <div class="head">
+                            <span class="fa fa-question-circle"></span> WAS willst du unternehmen?
+                        </div>
+                        <div class="bottom">
+                            <div id="CheckedFilterBox_Was">
+                                <a *ngFor="let item of filters.categoryFilter; let i = index">
+                                    <button *ngIf="item.selected" type="button" class="btn btn-xs ElementeInPanel btn-primary" (click)="item.selected = false;"
+                                        [ngClass]="{dating: item.name == 'Dating', bildung: item.name == 'Bildung', sport: item.name == 'Sport & Fitness', reisen: item.name == 'Reisen', feiern: item.name == 'Feiern', essen: item.name == 'Essen & Trinken'}">+ {{item.name}}
+                                    </button>
+                                </a>
+                            </div>
+                            <br/>
+                            <div class="card with-nav-tabs mb-4" id="PanelAllgemeinWas">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0"> Kategorien </h6>
+                                </div>
+                                <div class="card-content">
+                                    <div class="tab-content">
+                                        <a *ngFor="let item of filters.categoryFilter; let i = index">
+                                            <button *ngIf="!item.selected" type="button" class="btn btn-xs btn-primary ElementeInPanel" (click)="item.selected = true"
+                                                [ngClass]="{dating: item.name == 'Dating', bildung: item.name == 'Bildung', sport: item.name == 'Sport & Fitness', reisen: item.name == 'Reisen', feiern: item.name == 'Feiern', essen: item.name == 'Essen & Trinken'}">+ {{item.name}}
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card with-nav-tabs mb-4" id="PanelAllgemeinWas">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0"> Weitere Eventmöglichkeiten </h6>
+                                </div>
+                                <div class="card-content">
+                                    <div class="tab-content">
+                                        <a *ngFor="let item of businessUsers; let i = index">
+                                            <button type="button" class="btn btn-xs btn-danger ElementeInPanel" (click)="gotoMoreEventPage(item.id)">+ {{item.name}}
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-success filterMe" (click)="filterEvents()">Filter anwenden
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filterBox collapse" id="FilterWoGesamt" data-parent="#accordion">
+                        <div class="head">
+                            <span class="fa fa-map-marker"></span> In welcher Stadt sucht ihr?
+                        </div>
+                        <div class="bottom">
+                            <div id="CheckedFilterBox_Wo">
+                                <a *ngFor="let item of filters.cityFilter; let i = index">
+                                    <button *ngIf="item.selected" type="button" class="btn btn-xs ElementeInPanel btn-primary" (click)="item.selected = false;">+ {{item.name}}
+                                    </button>
+                                </a>
+                            </div>
+                            <br/>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h6 class="card-title mb-0">Deine Orte:</h6>
+                                </div>
+                                <div class="card-content">
+                                    <div class="tab-content" id="NotCheckedFilterBox_Wo">
+                                        <a *ngFor="let item of filters.cityFilter; let i = index">
+                                            <button *ngIf="!item.selected" type="button" class="btn btn-xs btn-primary ElementeInPanel" (click)="item.selected = true">+ {{item.name}}
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success filterMe" (click)="filterEvents()">Filter anwenden
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filterBox collapse" id="FilterWannGesamt" data-parent="#accordion">
+                        <div class="head">
+                            <span class="glyphicon glyphicon-time"></span> Wann plant ihr?
+                        </div>
+                        <div class="bottom">
+                            <div class="input-group mb-4" id="DatePickerDiv">
+                                <input type="date" class="form-control" id="DatePicker" placeholder="YYYY-MM-DD" [(ngModel)]="filters.dateFilter">
+                            </div>
+                            <button type="button" class="btn btn-success filterMe" (click)="filterEvents()">Filter anwenden
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="filterBox collapse" id="FilterWerGesamt" data-parent="#accordion">
+                        <div class="head">
+                            <span class="glyphicon glyphicon-user"></span> Wieviel Personen sucht ihr?
+                        </div>
+                        <div class="bottom">
+                            <div id="CheckedFilterBox_Wer">
+                                <a *ngFor="let item of filters.numberFilter; let i = index">
+                                    <button *ngIf="item.selected" type="button" class="btn btn-xs ElementeInPanel btn-primary" (click)="item.selected = false;">+ {{item.number}} Pers
+                                    </button>
+                                </a>
+                            </div>
+                            <br/>
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h6 class="panel-title mb-0">W&auml;hle Gruppen Gr&ouml;ssen aus!</h6>
+                                </div>
+                                <div class="card-content">
+                                    <div class="tab-content" id="NotCheckedFilterBox_Wer">
+
+                                        <a *ngFor="let item of filters.numberFilter; let i = index">
+                                            <button *ngIf="!item.selected" type="button" class="btn btn-xs btn-primary ElementeInPanel" (click)="item.selected = true;">+ {{item.number}} Pers.
+                                            </button>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success filterMe" (click)="filterEvents()">Filter anwenden
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="MainBox">
+        <div class="events-wrapper text-center" *ngIf="events.length > 0">
+            <div class="row">
+                <div *ngFor="let event of events | paginate: {itemsPerPage: 6, currentPage: p}; let i = index" class="col-lg-4 col-md-6 col-sm-12 text-center">
+
+                    <div class="PictureBox">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="UserPicture" (click)="contact(event)">
+                                    <div class="date">
+                                        <span class="month">{{event.Datum | date : 'MMM'}}</span>
+                                        <span class="day">{{event.Datum | date : 'dd'}}</span>
+                                    </div>
+                                    <div class="backdrop" [ngClass]="{dating: event.category == 'Dating', bildung: event.category == 'Bildung', sport: event.category == 'Sport & Fitness', reisen: event.category == 'Reisen', feiern: event.category == 'Feiern', essen: event.category == 'Essen & Trinken'}"></div>
+                                    <img [src]="event.image ? event.image : '../../../assets/img/profile.jpg'" class="d-inline d-md-none" />
+                                    <div [ngStyle]="{'background-image': 'url(' + event.image + ')'}" class="image d-none d-md-block"></div>
+                                    <div class="bubble" [id]="'bubble' + event.id">
+                                        <p id="BubbleTopText">Beschreibung</p>
+                                        <div id="BubbleMainText">{{event.Beschreibung}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="eventInfoBox">
+                            <div class="row" style="margin-top: 5px;">
+                                <div *ngIf="!event.specialEvent" class="col-12 col-sm-12 col-md-12 text-left font-xs-12 truncate EventDetailsLocationDate">
+                                    {{event.Ort }} | {{event.Datum | date:'EEEE, dd. MMM'}} {{event.time? '| ' + event.time.substr(0, 5) + ' Uhr' : ''}}
+                                </div>
+                                <div *ngIf="event.specialEvent" class="col-12 col-sm-12 col-md-12 text-left font-xs-12 truncate EventDetailsLocationDate" title={{event.Ort}}>
+                                    {{(event.Ort.length>12)? (event.Ort|slice:0:10)+'...':(event.Ort)}} | {{event.Datum | date:'EEEE, dd. MMM'}} {{event.time?
+                                    '| ' + event.time.substr(0, 5) + ' Uhr' : ''}}
+                                </div>
+
+                                <!-- <div class="col-4 col-sm-4  text-right">
+                                    <a class="text-danger" data-toggle="ajaxModal" *ngIf="event.createrId == setting.getUserSetting('id')" style="margin-right: 5px;">My event
+                                    </a>
+                                </div> -->
+                                <!-- <div class="col-7 col-sm-7 col-md-8 text-left truncate" style="font-size: 16px;">
+                                    <span class="fa fa-question"></span>
+                                    {{event.Titel}}
+                                </div> -->
+                                <!-- <div class="col-5 col-sm-5 col-md-4 text-right">
+                                    <a class="btn btn-success hidden-xs" data-toggle="ajaxModal" (click)="contact(event)" *ngIf="event.createrId != setting.getUserSetting('id')"
+                                        style="margin-right: 5px;">
+                                        <span class="fa fa-envelope"></span> Contact
+                                    </a>
+
+                                    <a class="btn btn-primary hidden-xs" data-toggle="ajaxModal" *ngIf="event.createrId == setting.getUserSetting('id')" style="margin-right: 5px;">My event
+                                    </a>
+                                </div> -->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 text-left font-xs-12 truncate EventDetailsTitle">
+                                    {{event.Titel}}
+                                </div>
+
+                                <!-- <div class="col-4 col-sm-4  text-right">
+                                    <button type="button" class="btn btn-default MoreInfoButton visible-lg pull-right" (click)="showMoreInfo(event.id)" data-id="{{event.id}}"
+                                        style="margin-right: 5px;">
+                                        <span class="fa fa-exclamation"></span> More Info
+                                    </button>
+                                </div> -->
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+        </div>
+        <p id="MainBox_nichtsGefunden" *ngIf="events.length == 0" class="text-center">Leider Keine Ergebnisse</p>
+    </div>
+
+
+    <div id="PARALLAX_bigBox" class="d-none d-md-block d-lg-block">
+
+
+        <!-- <div class="PARALLAX_allPictures" id="PARALLAX_bild1"></div> -->
+        <div class="PARALLAX_allSlides" style="height: 450px;">
+            <p class="PARALLAX_bigTitel" style="margin-top: -45px; padding-bottom: 45px;">
+                So funktioniert InGroups !
+            </p>
+            <div id="PARALLAX_soFunktioniertBox">
+                <div class="PARALLAX_soFunktioniertBoxKlein">
+                    <div class="PARALLAX_soFunktioniertTitelBox">
+                        <img src="../../../assets/img/camera.png" alt="" class="PARALLAX_soFunktioniertImg" style="margin-top: 5px;">
+                        <p class="PARALLAX_soFunktioniertTitel">1. Foto machen.</p>
+                    </div>
+                    <div class="PARALLAX_soFunktioniertTextBox">
+                        <p>Startet ein neues Event, alleine oder in einer Gruppe von 2 bis 15 Personen und macht ein schönes
+                            Foto von euch.</p>
+                    </div>
+                </div>
+
+                <div class="PARALLAX_soFunktioniertBoxKlein">
+                    <div class="PARALLAX_soFunktioniertTitelBox">
+                        <img src="../../../assets/img/INFO_message.png" alt="" class="PARALLAX_soFunktioniertImg" style="margin-top: 10px;">
+                        <p class="PARALLAX_soFunktioniertTitel">2. Nachrichten</p>
+                    </div>
+                    <div class="PARALLAX_soFunktioniertTextBox">
+                        <p>Oder kontaktiert die Gruppen/Personen, die ihr treffen m&ouml;chtet.</p>
+                    </div>
+                </div>
+
+                <div class="PARALLAX_soFunktioniertBoxKlein">
+                    <div class="PARALLAX_soFunktioniertTitelBox">
+                        <img src="../../../assets/img/INFO_group.png" alt="" class="PARALLAX_soFunktioniertImg">
+                        <p class="PARALLAX_soFunktioniertTitel">3. Leute treffen</p>
+                    </div>
+                    <div class="PARALLAX_soFunktioniertTextBox">
+                        <p>
+                            Habt ihr eine Nachricht erhalten, dann plant eure Verabredung und genie&szlig;t den Tag oder Abend zusammen.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="PARALLAX_allPictures" id="PARALLAX_bild2"></div> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="../../../assets/img/parallax/3.jpg" style="width: 100%">
+                </div>
+                <div class="col-md-6">
+                    <div class="PARALLAX_allSlides pt-0" style="height: 370px;">
+                        <div class="PARALLAX_textBox" style="width: 100%;">
+                            <p class="PARALLAX_bigTitel" style="">Warum InGroups?</p>
+                            <p class="PARALLAX_text">
+                                Mit InGroups habt ihr die beste M&ouml;glichkeit ganz unkompliziert eure Treffen zu planen.
+                            </p>
+                            <p class="PARALLAX_text">Gemeinsam mit Freunden eine Gruppe kennenlernen, schafft eine entspannte und lockere Atmosphäre.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="PARALLAX_allPictures" id="PARALLAX_bild3"></div> -->
+        <div class="container" style="margin-top: 100px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="PARALLAX_allSlides pt-0" style="height: 400px;">
+                        <div class="PARALLAX_textBox" style="width: 100%;">
+                            <p class="PARALLAX_bigTitel">InGroups ist die L&ouml;sung!</p>
+                            <p class="PARALLAX_text">Egal, ob ihr die gro&szlig;e Liebe sucht, den Freundeskreis erweitern oder ihr einfach nur einen
+                                Freund begleitet, InGroups bringt Abwechselung in euer Leben und mit Sicherheit auch ein
+                                Lachen ins Gesicht.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="../../../assets/img/parallax/4.jpg" style="width: 100%">
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="PARALLAX_allPictures" id="PARALLAX_bild4"></div> -->
+        <div class="PARALLAX_allSlides pt-0" style="height: 170px;">
+            <div class="PARALLAX_textBox">
+                <p class="PARALLAX_bigTitel">Das Beste zum Schlu&szlig; !</p>
+                <p class="PARALLAX_text">
+                    Ihr werdet feststellen Offline ist besser als Online, um eine geniale Zeit zu haben!
+                </p>
+            </div>
+        </div>
+        <div class="PARALLAX_allPictures" id="PARALLAX_bild5"></div>
+    </div>
+</div>
+
+
+<!-- <div class="modal fade" id="videoModal" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="videoModalLabel">So funktioniert InGroups!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="text-center" style="overflow: hidden">
+                        <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/0f5EVTlq7zY?autoplay=1" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+<div class="modal fade" id="helpModal" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="helpModalLabel">So funktioniert InGroups!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <!-- Nav tabs -->
+                    <div class="text-center" style="overflow: hidden">
+                        <div class="PARALLAX_soFunktioniertBoxKlein">
+                            <div class="PARALLAX_soFunktioniertTitelBox">
+                                <img src="../../../assets/img/camera.png" alt="" class="PARALLAX_soFunktioniertImg" style="margin-top: 5px;">
+                                <p class="PARALLAX_soFunktioniertTitel">1. Foto machen.</p>
+                            </div>
+                            <div class="PARALLAX_soFunktioniertTextBox">
+                                <p>Startet ein neues Event, alleine oder in einer Gruppe von 2 bis 15 Personen und macht ein
+                                    schönes Foto von euch.</p>
+                            </div>
+                        </div>
+
+                        <div class="PARALLAX_soFunktioniertBoxKlein">
+                            <div class="PARALLAX_soFunktioniertTitelBox">
+                                <img src="../../../assets/img/INFO_message.png" alt="" class="PARALLAX_soFunktioniertImg" style="margin-top: 10px;">
+                                <p class="PARALLAX_soFunktioniertTitel">2. Nachrichten</p>
+                            </div>
+                            <div class="PARALLAX_soFunktioniertTextBox">
+                                <p>Oder kontaktiert die Gruppen/Personen, die ihr treffen m&ouml;chtet.</p>
+                            </div>
+                        </div>
+
+                        <div class="PARALLAX_soFunktioniertBoxKlein">
+                            <div class="PARALLAX_soFunktioniertTitelBox">
+                                <img src="../../../assets/img/INFO_group.png" alt="" class="PARALLAX_soFunktioniertImg">
+                                <p class="PARALLAX_soFunktioniertTitel">3. Leute treffen</p>
+                            </div>
+                            <div class="PARALLAX_soFunktioniertTextBox">
+                                <p>
+                                    Habt ihr eine Nachricht erhalten, dann plant eure Verabredung und genie&szlig;t den Tag oder Abend zusammen.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="text-center">
+                        <button id="InfoOkayButton" class="btn btn-success" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

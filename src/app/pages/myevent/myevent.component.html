@@ -1,0 +1,89 @@
+<div id="myevents-page">
+        <div id="MainBox">
+            <div class="events-wrapper text-center" *ngIf="events.length > 0">
+                <div class="row">
+                    <div *ngFor="let event of events | paginate: {itemsPerPage: 6, currentPage: p}; let i = index"
+                        class="col-lg-4 col-md-6 col-sm-12 text-center">
+    
+                        <div class="PictureBox">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="UserPicture">
+                                        <div class="backdrop"
+                                            [ngClass]="{dating: event.category == 'Dating', bildung: event.category == 'Bildung', sport: event.category == 'Sport & Fitness', reisen: event.category == 'Reisen', feiern: event.category == 'Feiern', essen: event.category == 'Essen & Trinken'}"></div>
+                                        <img [src]="event.image ? event.image : '../../../assets/img/thumbnail.png'"/>
+                                        <div class="bubble" [id]="'bubble' + event.event_location_id">
+                                            <p id="BubbleTopText">Beschreibung</p>
+                                            <div id="BubbleMainText">{{event.Beschreibung}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+    
+                            <div class="eventInfoBox">
+                                <div class="row" style="margin-top: 5px;">
+                                    <div *ngIf="!event.specialEvent" class="col-12 col-sm-12 col-md-12 text-left font-xs-12 truncate">
+                                        {{event.location }} | {{event.Datum | date:'EEEE, dd. MMM'}} {{event.time? '| ' + event.time.substr(0, 5) + ' Uhr' : ''}}
+                                    </div>
+                                    <div *ngIf="event.specialEvent" class="col-12 col-sm-12 col-md-12 text-left font-xs-12 truncate" title={{event.location}}>
+                                        {{(event.location.length>12)? (event.location|slice:0:9)+'...':(event.location)}} | {{event.Datum | date:'EEEE, dd. MMM'}} {{event.time?
+                                        '| ' + event.time.substr(0, 5) + ' Uhr' : ''}}
+                                    </div>
+                                </div>
+    
+                                <div class="row mb-1">
+                                    <div class="col-12 text-left font-xs-12 truncate EventDetailsTitle">
+                                        {{event.Titel}}
+                                    </div>
+                                </div>                            
+                                <div class="row">
+                                    <div class="col-4 col-sm-4 col-md-4 text-left">
+                                        <button type="button" class="btn btn-success btn-sm font-12" (click)="showWhatsappInfo(event)"
+                                                data-id="{{event.id}}" [disabled]="event.event_location_end">
+                                            <span class="fa fa-whatsapp"></span> WhatsApp
+                                        </button>
+                                    </div>    
+                                    <div class="col-4 col-sm-4 col-md-4 text-center ">
+                                            <button type="button" class="btn btn-primary btn-sm font-12 w-100" (click)="showCounterInfo(event)"
+                                                data-id="{{event.id}}" [disabled]="event.event_location_end"> Zähler
+                                        </button>
+                                    </div>                            
+                                    <div class="col-4 col-sm-4 col-md-4 pl-0 text-right">
+                                        <button type="button" class="btn btn-success btn-sm font-12" (click)="showMoreInfo(event.event_location_id)"
+                                                data-id="{{event.event_location_id}}">
+                                                <span class="fa fa-exclamation"></span> Mehr Info
+                                        </button>
+                                    </div>
+                                </div>
+                                <hr class="mt-2 mb-2">
+                                <div class="row">
+                                    <div class="col-12" style="color:  #fff;">
+                                        <a class="btn btn-primary hidden-xs w-100" data-toggle="ajaxModal" *ngIf="event.event_location_end != 1" (click)="endEvent(event)">Beende die Veranstaltung
+                                        </a>
+                                        <a class="btn btn-danger hidden-xs w-100" data-toggle="ajaxModal" *ngIf="event.event_location_end == 1">Veranstaltung endete
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!--<div class="text-left font-weight-bold contact-number">
+                                    contacts <span class="text-danger">{{event.contact_count}}/{{event.Anzahl}}</span> 
+                                </div> -->
+
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+
+              <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+          </div>
+          <p id="MainBox_nichtsGefunden" *ngIf="events.length == 0" class="text-center">Leider Keine Ergebnisse</p>
+    
+          <div class="text-right mb-3">
+              <button class="new-event-btn" (click)="newEvent()">
+                  Neues Event
+              </button>
+          </div>
+      </div>
+    </div>

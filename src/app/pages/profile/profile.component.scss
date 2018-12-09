@@ -1,0 +1,40 @@
+#profile-page {
+    border-top: 2px solid;
+    .page-content {
+        padding-top: 50px;
+
+        .photo-wrapper {
+            padding: 0px 40px 30px 40px;
+            position: relative;
+            img {
+                width: 100%;
+                border-radius: 5px;
+            }
+            button {
+                cursor: pointer;
+            }
+        }
+
+        .main-wrapper {
+            color: midnightblue;
+
+            .name {
+
+            }
+
+            .about {
+                .title {
+                    border-bottom: 1px solid lightgrey;
+                }
+
+                .item {
+                    margin-bottom: 30px;
+
+                    .val {
+                        color: #00bbff;
+                    }
+                }
+            }
+        }
+    }
+}
